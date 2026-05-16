@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -104,5 +106,41 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Montserrat", sans-serif;
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Cormorant Garamond", serif;
+  }
+}
+
+/* Sakura decorative */
+.sakura-flower {
+  position: relative;
+  display: inline-block;
+}
+
+/* Branch SVG decorative styles */
+.branch-nav-item {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--epoxy-dark);
+  transition: color 0.2s;
+}
+
+.branch-nav-item:hover {
+  color: var(--epoxy-brown);
+}
+
+/* Star rating */
+.star-filled {
+  color: #f8c8d4;
+}
+.star-empty {
+  color: #e0e0e0;
 }
