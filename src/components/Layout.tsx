@@ -11,22 +11,28 @@ const Layout = ({ children }: LayoutProps) => {
   const { totalCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const isActive = (path: string) => location.pathname === path;
 
   const navItemClass = (path: string) =>
-    `branch-nav-item whitespace-nowrap relative ${isActive(path) ? "font-semibold text-[#8b5a6a]" : ""}`;
+    `branch-nav-item whitespace-nowrap relative transition-colors ${
+      isActive(path) ? "font-semibold text-[#8b5a6a]" : ""
+    }`;
+
+  if (isHome) {
+    // Главная — полностью отдельный layout без шапки
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
+      {/* Compact header for inner pages */}
       <header className="relative overflow-hidden bg-white border-b border-[#f2d4dc]">
         <div className="flex items-stretch min-h-[160px]">
           {/* Branch + nav */}
           <div className="relative w-[320px] flex-shrink-0">
             <SakuraBranch className="absolute inset-0 w-full h-full" />
-
-            {/* Nav labels — positioned to match the branch visually */}
             <nav className="absolute inset-0">
               {/* Top row: корзина + контакты */}
               <div className="absolute top-[18px] left-[110px] flex gap-8">
@@ -89,7 +95,6 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </header>
 
-      {/* Main */}
       <main>{children}</main>
     </div>
   );
