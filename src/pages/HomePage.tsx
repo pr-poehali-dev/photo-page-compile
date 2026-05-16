@@ -1,208 +1,155 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 
-// Inline SVG branch for the full-screen home layout
-const HomeBranch = ({ className = "" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 520 620"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    {/* Main trunk */}
-    <path
-      d="M60 620 Q100 540 150 480 Q200 420 230 360 Q260 300 280 240 Q300 180 310 120 Q320 70 340 30"
-      stroke="#1a0a0e" strokeWidth="9" strokeLinecap="round" fill="none"
-    />
-    {/* Left branch (отзывы) */}
-    <path
-      d="M150 480 Q110 450 80 420 Q50 390 20 370"
-      stroke="#1a0a0e" strokeWidth="6" strokeLinecap="round" fill="none"
-    />
-    {/* Right branch top (корзина/контакты) */}
-    <path
-      d="M280 240 Q320 220 360 200 Q400 180 430 155"
-      stroke="#1a0a0e" strokeWidth="5" strokeLinecap="round" fill="none"
-    />
-    {/* Small branch mid (каталог) */}
-    <path
-      d="M230 360 Q270 345 300 330 Q330 315 355 300"
-      stroke="#1a0a0e" strokeWidth="4.5" strokeLinecap="round" fill="none"
-    />
-    {/* Tiny tip branch */}
-    <path
-      d="M310 120 Q290 90 280 60"
-      stroke="#1a0a0e" strokeWidth="4" strokeLinecap="round" fill="none"
-    />
-
-    {/* Flowers */}
-    {/* Top tip */}
-    <g transform="translate(340,26)">
-      <circle cx="0" cy="-14" r="11" fill="#f8c8d4" opacity="0.92"/>
-      <circle cx="13" cy="-4" r="11" fill="#f8c8d4" opacity="0.92"/>
-      <circle cx="8" cy="11" r="11" fill="#f8c8d4" opacity="0.92"/>
-      <circle cx="-8" cy="11" r="11" fill="#f8c8d4" opacity="0.92"/>
-      <circle cx="-13" cy="-4" r="11" fill="#f8c8d4" opacity="0.92"/>
-      <circle cx="0" cy="0" r="6" fill="#fde8ed"/>
-      <circle cx="0" cy="0" r="2.5" fill="#c97a90"/>
-    </g>
-    {/* Right branch end (корзина/контакты area) */}
-    <g transform="translate(432,150)">
-      <circle cx="0" cy="-12" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="11" cy="-4" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="7" cy="10" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="-7" cy="10" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="-11" cy="-4" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="0" cy="0" r="6" fill="#fde8ed"/>
-      <circle cx="0" cy="0" r="2" fill="#c97a90"/>
-    </g>
-    {/* Mid right branch */}
-    <g transform="translate(356,298)">
-      <circle cx="0" cy="-10" r="8.5" fill="#f8c8d4" opacity="0.88"/>
-      <circle cx="10" cy="-3" r="8.5" fill="#f8c8d4" opacity="0.88"/>
-      <circle cx="6" cy="8" r="8.5" fill="#f8c8d4" opacity="0.88"/>
-      <circle cx="-6" cy="8" r="8.5" fill="#f8c8d4" opacity="0.88"/>
-      <circle cx="-10" cy="-3" r="8.5" fill="#f8c8d4" opacity="0.88"/>
-      <circle cx="0" cy="0" r="5" fill="#fde8ed"/>
-      <circle cx="0" cy="0" r="2" fill="#c97a90"/>
-    </g>
-    {/* Left branch end (отзывы area) */}
-    <g transform="translate(18,368)">
-      <circle cx="0" cy="-12" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="11" cy="-4" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="7" cy="10" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="-7" cy="10" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="-11" cy="-4" r="10" fill="#f8c8d4" opacity="0.9"/>
-      <circle cx="0" cy="0" r="6" fill="#fde8ed"/>
-      <circle cx="0" cy="0" r="2" fill="#c97a90"/>
-    </g>
-    {/* Bottom trunk (о нас area) */}
-    <g transform="translate(88,560)">
-      <circle cx="0" cy="-14" r="12" fill="#f8c8d4" opacity="0.85"/>
-      <circle cx="13" cy="-5" r="12" fill="#f8c8d4" opacity="0.85"/>
-      <circle cx="8" cy="11" r="12" fill="#f8c8d4" opacity="0.85"/>
-      <circle cx="-8" cy="11" r="12" fill="#f8c8d4" opacity="0.85"/>
-      <circle cx="-13" cy="-5" r="12" fill="#f8c8d4" opacity="0.85"/>
-      <circle cx="0" cy="0" r="7" fill="#fde8ed"/>
-      <circle cx="0" cy="0" r="2.8" fill="#c97a90"/>
-    </g>
-  </svg>
+const SakuraFlower = ({ r = 10 }: { r?: number }) => (
+  <>
+    <circle cx="0" cy={-r * 1.2} r={r} fill="#f8c8d4" opacity="0.92" />
+    <circle cx={r * 1.1} cy={-r * 0.4} r={r} fill="#f8c8d4" opacity="0.92" />
+    <circle cx={r * 0.7} cy={r * 1.0} r={r} fill="#f8c8d4" opacity="0.92" />
+    <circle cx={-r * 0.7} cy={r * 1.0} r={r} fill="#f8c8d4" opacity="0.92" />
+    <circle cx={-r * 1.1} cy={-r * 0.4} r={r} fill="#f8c8d4" opacity="0.92" />
+    <circle cx="0" cy="0" r={r * 0.55} fill="#fce8ef" />
+    <circle cx="0" cy="0" r={r * 0.22} fill="#d4849a" />
+  </>
 );
-
-const navLabelClass = (active = false) =>
-  `text-[13px] font-medium tracking-wide text-[#1a0a0e] hover:text-[#8b5a6a] transition-colors cursor-pointer whitespace-nowrap ${
-    active ? "text-[#8b5a6a] font-semibold" : ""
-  }`;
 
 const HomePage = () => {
   const navigate = useNavigate();
   const { totalCount } = useCart();
 
+  const font = { fontFamily: "'Cormorant Garamond', serif" };
+  const mono = { fontFamily: "'Montserrat', sans-serif" };
+
+  const navBtn = (label: React.ReactNode, path: string, extra?: string) => (
+    <button
+      onClick={() => navigate(path)}
+      className={`text-[13px] leading-tight text-[#1a0a0e] hover:text-[#c97a90] transition-colors font-medium tracking-wide ${extra ?? ""}`}
+      style={mono}
+    >
+      {label}
+    </button>
+  );
+
   return (
-    <div className="w-screen h-screen overflow-hidden bg-white flex flex-col">
-      {/* TOP HALF: branch + logo */}
-      <div className="relative flex flex-1 min-h-0">
-        {/* Left: branch with nav */}
-        <div className="relative w-[45%] flex-shrink-0">
-          <HomeBranch className="absolute inset-0 w-full h-full" />
+    <div
+      className="w-screen h-screen overflow-hidden bg-white select-none"
+      style={{ display: "grid", gridTemplateRows: "1fr auto" }}
+    >
+      {/* ── TOP ZONE: branch left + logo right ── */}
+      <div className="relative overflow-hidden">
 
-          {/* Nav labels positioned over branch */}
-          <nav className="absolute inset-0 pointer-events-none">
-            {/* корзина + контакты — top right of branch */}
-            <div className="absolute top-[13%] left-[50%] flex gap-6 pointer-events-auto">
-              <button onClick={() => navigate("/cart")} className={`${navLabelClass()} relative`}>
-                корзина
-                {totalCount > 0 && (
-                  <span className="absolute -top-1 -right-3 bg-[#f8c8d4] text-[#2c1a1f] text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                    {totalCount}
-                  </span>
-                )}
-              </button>
-              <button onClick={() => navigate("/contacts")} className={navLabelClass()}>
-                контакты
-              </button>
-            </div>
+        {/* SVG branch — absolute, left side */}
+        <svg
+          viewBox="0 0 460 500"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute left-0 top-0 h-full"
+          style={{ width: "42%" }}
+          preserveAspectRatio="xMinYMin meet"
+        >
+          {/* trunk bottom-left → top-right */}
+          <path d="M30 500 Q70 430 120 370 Q170 310 200 255 Q230 200 250 150 Q265 110 285 70 Q300 40 320 15"
+            stroke="#1a0a0e" strokeWidth="11" strokeLinecap="round" fill="none" />
+          {/* left branch → отзывы */}
+          <path d="M120 370 Q85 345 55 320 Q30 300 5 290"
+            stroke="#1a0a0e" strokeWidth="7" strokeLinecap="round" fill="none" />
+          {/* right branch mid → каталог */}
+          <path d="M200 255 Q235 245 265 235 Q295 225 320 215"
+            stroke="#1a0a0e" strokeWidth="6" strokeLinecap="round" fill="none" />
+          {/* right branch top → корзина/контакты */}
+          <path d="M265 110 Q300 95 330 80 Q360 68 395 55"
+            stroke="#1a0a0e" strokeWidth="5" strokeLinecap="round" fill="none" />
+          {/* tiny tip */}
+          <path d="M285 70 Q268 48 260 28"
+            stroke="#1a0a0e" strokeWidth="4" strokeLinecap="round" fill="none" />
 
-            {/* отзывы — left branch */}
-            <div className="absolute top-[38%] left-[3%] pointer-events-auto">
-              <button onClick={() => navigate("/reviews")} className={navLabelClass()}>
-                отзывы
-              </button>
-            </div>
+          {/* Flower: top tip */}
+          <g transform="translate(320,12)"><SakuraFlower r={12} /></g>
+          {/* Flower: корзина/контакты branch end */}
+          <g transform="translate(396,52)"><SakuraFlower r={10} /></g>
+          {/* Flower: каталог branch end */}
+          <g transform="translate(320,212)"><SakuraFlower r={10} /></g>
+          {/* Flower: отзывы branch end */}
+          <g transform="translate(4,288)"><SakuraFlower r={11} /></g>
+          {/* Flower: о нас / bottom trunk */}
+          <g transform="translate(62,458)"><SakuraFlower r={13} /></g>
+        </svg>
 
-            {/* каталог — mid branch */}
-            <div className="absolute top-[57%] left-[42%] pointer-events-auto">
-              <button onClick={() => navigate("/catalog")} className={navLabelClass()}>
-                каталог
-              </button>
-            </div>
-
-            {/* о нас — bottom */}
-            <div className="absolute bottom-[6%] left-[3%] pointer-events-auto">
-              <button onClick={() => navigate("/about")} className={navLabelClass()}>
-                о нас
-              </button>
-            </div>
-          </nav>
+        {/* ── NAV LABELS over branch ── */}
+        {/* корзина + контакты — top, right side of upper branch */}
+        <div className="absolute" style={{ top: "13%", left: "22%" }}>
+          <div className="flex gap-8 items-start">
+            {navBtn(<>кор-<br />зина</>, "/cart",
+              totalCount > 0 ? "relative" : ""
+            )}
+            {totalCount > 0 && (
+              <span
+                className="absolute -top-1 left-8 bg-[#f8c8d4] text-[#2c1a1f] text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                style={{ pointerEvents: "none" }}
+              >
+                {totalCount}
+              </span>
+            )}
+            {navBtn(<>кон-<br />такты</>, "/contacts")}
+          </div>
         </div>
 
-        {/* Right: logo */}
-        <div className="flex-1 flex flex-col items-end justify-start pt-10 pr-12">
-          <button onClick={() => navigate("/")} className="text-right">
-            <div
-              className="text-6xl font-light tracking-[0.18em] text-[#1a0a0e]"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
+        {/* отзывы — left branch */}
+        <div className="absolute" style={{ top: "38%", left: "1%" }}>
+          {navBtn(<>отзы-<br />вы</>, "/reviews")}
+        </div>
+
+        {/* каталог — mid branch */}
+        <div className="absolute" style={{ top: "54%", left: "22%" }}>
+          {navBtn(<>ката-<br />лог</>, "/catalog")}
+        </div>
+
+        {/* о нас — bottom left */}
+        <div className="absolute" style={{ bottom: "4%", left: "2%" }}>
+          {navBtn("о нас", "/about")}
+        </div>
+
+        {/* ── LOGO top right ── */}
+        <div className="absolute top-0 right-0 pt-8 pr-10 text-right">
+          <button onClick={() => navigate("/")} className="hover:opacity-80 transition-opacity">
+            <div className="text-[52px] font-light tracking-[0.15em] text-[#1a0a0e] leading-none" style={font}>
               ЭП<span className="text-[#c97a90]">✳</span>КСИ
             </div>
-            <div
-              className="text-[10px] tracking-[0.28em] text-[#8b5a6a] mt-2 text-right leading-5"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
+            <div className="text-[9px] tracking-[0.28em] text-[#8b5a6a] mt-2 leading-[1.8]" style={mono}>
               МАГАЗИН ОРИГИНАЛЬНЫХ УКРАШЕНИЙ ИЗ<br />ЭПОКСИДНОЙ СМОЛЫ
             </div>
           </button>
         </div>
       </div>
 
-      {/* DIVIDER */}
-      <div className="border-t border-[#f2d4dc] mx-8" />
+      {/* ── BOTTOM ZONE: divider + акции ── */}
+      <div className="border-t border-[#e8c8d4]" />
+      <div className="relative px-12 py-8 overflow-hidden flex items-center" style={{ minHeight: "38vh" }}>
 
-      {/* BOTTOM HALF: Акции */}
-      <div className="flex items-center px-12 py-10 bg-white">
-        <div className="flex-1">
-          <div className="relative">
-            {/* Watermark % */}
-            <span
-              className="absolute -left-6 -top-10 text-[200px] font-bold text-[#f8c8d4] opacity-30 select-none leading-none pointer-events-none"
-              aria-hidden
-            >
-              %
-            </span>
-            <h1
-              className="relative text-6xl font-light text-[#1a0a0e] tracking-widest uppercase z-10"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              Скидки и акции
-            </h1>
-          </div>
+        {/* Big watermark % */}
+        <span
+          className="absolute right-16 top-1/2 -translate-y-1/2 text-[220px] font-bold leading-none text-[#f8c8d4] opacity-25 pointer-events-none"
+          aria-hidden
+          style={font}
+        >
+          %
+        </span>
 
-          <ul className="mt-6 space-y-3">
+        <div className="relative z-10">
+          <h1 className="text-[52px] font-light tracking-[0.12em] text-[#1a0a0e] uppercase leading-tight" style={font}>
+            Скидки и акции
+          </h1>
+
+          <ul className="mt-5 space-y-3">
             <li className="flex items-start gap-3">
-              <span className="text-[#1a0a0e] text-base leading-none mt-1">•</span>
-              <p
-                className="text-sm tracking-widest text-[#1a0a0e] uppercase font-medium"
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
+              <span className="text-[#1a0a0e] text-base mt-0.5 leading-none">•</span>
+              <p className="text-[11px] tracking-[0.18em] text-[#1a0a0e] uppercase font-medium" style={mono}>
                 С 03.05.26 по 20.05.26 скидка 20% на все брелки
               </p>
             </li>
             <li className="flex items-start gap-3">
-              <span className="text-[#1a0a0e] text-base leading-none mt-1">•</span>
-              <p
-                className="text-sm tracking-widest uppercase font-medium"
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
+              <span className="text-[#1a0a0e] text-base mt-0.5 leading-none">•</span>
+              <p className="text-[11px] tracking-[0.18em] uppercase font-medium" style={mono}>
                 <span className="text-[#1a0a0e]">Купишь два брелка — </span>
                 <span className="text-[#c97a90]">получишь кулон в подарок</span>
               </p>
