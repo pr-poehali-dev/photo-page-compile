@@ -1,10 +1,8 @@
-type Page = "home" | "catalog" | "about" | "reviews" | "contacts" | "cart";
+import { useNavigate } from "react-router-dom";
 
-interface HomePageProps {
-  onNavigate: (page: Page) => void;
-}
-
-const HomePage = ({ onNavigate }: HomePageProps) => {
+const HomePage = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(`/${page === "home" ? "" : page}`);
   return (
     <div>
       {/* Hero / Акции */}

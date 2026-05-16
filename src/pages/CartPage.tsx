@@ -1,13 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import Icon from "@/components/ui/icon";
 
-type Page = "home" | "catalog" | "about" | "reviews" | "contacts" | "cart";
-
-interface CartPageProps {
-  onNavigate: (page: Page) => void;
-}
-
-const CartPage = ({ onNavigate }: CartPageProps) => {
+const CartPage = () => {
+  const navigate = useNavigate();
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();
 
   if (items.length === 0) {
@@ -24,7 +20,7 @@ const CartPage = ({ onNavigate }: CartPageProps) => {
           Посмотрите наш каталог — там точно что-то понравится
         </p>
         <button
-          onClick={() => onNavigate("catalog")}
+          onClick={() => navigate("/catalog")}
           className="bg-[#2c1a1f] text-white px-8 py-3 rounded-full text-xs tracking-widest uppercase hover:bg-[#8b5a6a] transition-colors"
         >
           Перейти в каталог
@@ -96,18 +92,22 @@ const CartPage = ({ onNavigate }: CartPageProps) => {
           <span className="text-[#c97a90]">{totalPrice} ₽</span>
         </div>
 
-        <button className="w-full mt-6 bg-[#2c1a1f] text-white py-3.5 rounded-full text-xs tracking-widest uppercase hover:bg-[#8b5a6a] transition-colors">
-          Оформить заказ
-        </button>
+        {/* CTA: Связаться */}
         <button
-          onClick={() => onNavigate("contacts")}
-          className="w-full mt-3 text-sm text-[#8b5a6a] hover:text-[#c97a90] transition-colors"
+          onClick={() => navigate("/contacts")}
+          className="w-full mt-6 bg-[#c97a90] text-white py-3.5 rounded-full text-sm tracking-widest uppercase hover:bg-[#8b5a6a] transition-colors flex items-center justify-center gap-2"
         >
-          Или напишите нам для оформления
+          <Icon name="MessageCircle" size={16} />
+          Связаться
         </button>
+
+        <p className="text-center text-xs text-[#aaa] mt-3">
+          Напишите нам — поможем оформить заказ
+        </p>
+
         <button
           onClick={clearCart}
-          className="w-full mt-2 text-xs text-[#aaa] hover:text-[#c97a90] transition-colors"
+          className="w-full mt-4 text-xs text-[#bbb] hover:text-[#c97a90] transition-colors"
         >
           Очистить корзину
         </button>
