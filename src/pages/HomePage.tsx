@@ -11,7 +11,6 @@ const HomePage = () => {
   const navItems = [
     { label: "каталог",  path: "/catalog"  },
     { label: "о нас",    path: "/about"    },
-    { label: "отзывы",   path: "/reviews"  },
     { label: "контакты", path: "/contacts" },
   ];
 

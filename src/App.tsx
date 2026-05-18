@@ -8,7 +8,6 @@ import Icon from "@/components/ui/icon";
 import HomePage from "@/pages/HomePage";
 import CatalogPage from "@/pages/CatalogPage";
 import AboutPage from "@/pages/AboutPage";
-import ReviewsPage from "@/pages/ReviewsPage";
 import ContactsPage from "@/pages/ContactsPage";
 import CartPage from "@/pages/CartPage";
 import NotFound from "./pages/NotFound";
@@ -43,7 +42,6 @@ const InnerLayout = ({ children }: { children: React.ReactNode }) => {
         <nav className="flex items-center gap-8">
           <button onClick={() => navigate("/catalog")} className={linkClass("/catalog")}>Каталог</button>
           <button onClick={() => navigate("/about")} className={linkClass("/about")}>О нас</button>
-          <button onClick={() => navigate("/reviews")} className={linkClass("/reviews")}>Отзывы</button>
           <button onClick={() => navigate("/contacts")} className={linkClass("/contacts")}>Контакты</button>
         </nav>
 
@@ -75,7 +73,6 @@ const App = () => (
               <Route path="/" element={<HomePage />} />
               <Route path="/catalog" element={<CatalogPage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/reviews" element={<ReviewsPage />} />
               <Route path="/contacts" element={<ContactsPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="*" element={<NotFound />} />
